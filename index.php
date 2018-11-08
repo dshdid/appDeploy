@@ -14,7 +14,7 @@
 </header>
 
 <ul class = "navbar">
-            <li><a href = "PHP.html"> Home </a></li>
+            <li><a href = "PHP.html"> Calculator </a></li>
 </ul>
 
 <div>
