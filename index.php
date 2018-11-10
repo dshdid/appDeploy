@@ -13,14 +13,17 @@
     <br>
 </header>
 
-<ul class = "navbar">
-            <li><a href = "PHP.html"> Calculator </a></li>
+<ul>
+    <li><a href = "PHP.html"> Calculator </a></li>
 </ul>
+
+<form action="Index.php" method="post">
+    Name: <input type="text" name="name">
+    <input type="submit">
+</form>
 
 <div>
     <?php
-    
-    include('Forms.html');
     $filename = "friends.txt";
     $file = fopen( $filename, "r" );
     echo "<h1>My best friends:</h1>";
@@ -51,6 +54,10 @@
 
     ?>
 </div>
+
+<form action="Index.php" method="post">
+    Filter: <input type="text" name="nameFilter" value="<?=$nameFilter?>">
+</form>
 
 <footer>
     <p>Footer</p>
