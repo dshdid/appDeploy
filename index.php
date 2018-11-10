@@ -14,10 +14,10 @@
 </header>
 
 <ul>
-    <li><a href = "PHP.html"> Calculator </a></li>
+    <li><a href = "PHP.php"> Calculator </a></li>
 </ul>
 
-<form action="Index.php" method="post">
+<form action="index.php" method="post">
     Name: <input type="text" name="name">
     <input type="submit">
 </form>
@@ -55,9 +55,30 @@
     ?>
 </div>
 
-<form action="Index.php" method="post">
+<form action="index.php" method="post">
     Filter: <input type="text" name="nameFilter" value="<?=$nameFilter?>">
 </form>
+
+<div>
+    <?php
+    $file = fopen( $filename, "r" );
+    echo "<h1>Results: </h1>";
+    echo "<ul>";
+    if( $file != false ) {
+        while (!feof($file)) {
+            $name = fgets($file);
+            if (strstr(name, nameFilter)) {
+                echo "<li>$name</li>";
+            }
+
+        }
+        fclose( $file );
+    }
+    echo "</ul>";
+    
+
+    ?>
+</div>
 
 <footer>
     <p>Footer</p>
