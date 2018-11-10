@@ -57,10 +57,12 @@
 
 <form action="index.php" method="post">
     Filter: <input type="text" name="nameFilter" value="<?=$nameFilter?>">
+    <input type="submit">
 </form>
 
 <div>
     <?php
+    $filename = "friends.txt";
     $file = fopen( $filename, "r" );
     echo "<h1>Results: </h1>";
     echo "<ul>";
@@ -74,6 +76,7 @@
         }
         fclose( $file );
     }
+
     echo "</ul>";
     
 
