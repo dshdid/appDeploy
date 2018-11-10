@@ -70,11 +70,18 @@
         while (!feof($file)) {
             $name = fgets($file);
             if (strstr(name, nameFilter)) {
-                echo "<li>$name</li>";
+                $_POST.addslashes = $name;
             }
 
         }
         fclose( $file );
+
+        foreach ($_POST as $key) {
+            echo "<li><b>$key</b></li>";
+            }
+
+        }
+        unset($key);
     }
 
     echo "</ul>";
