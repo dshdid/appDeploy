@@ -61,7 +61,8 @@
 
 <form action="index.php" method="post">
         Filter: <input type="text" name="nameFilter"> <!--if i remove the value -> no error-->
-        <input type="checkbox" name="start"> Only names starting with 
+        <input type="checkbox" name="startingWith" value="TRUE">
+        Only names starting with
         <input type="submit" value="Filter List"> 
 </form>
 
@@ -71,11 +72,26 @@
     <?php
     $filename = "friends.txt";
     $file = fopen( $filename, "r" );
+    $filter = $_POST['nameFilter'];
+    $checked = $_POST['startingWith'];
     echo "<h1>Results: </h1>";
     echo "<ul>";
     foreach ($names as $key) {
-        if(isset($_POST['nameFilter']) && strstr($key, $_POST['nameFilter'])){
-            echo "<li><b>$key</b></li>";
+        if(isset($filter)){
+            if($checked == TRUE){
+                $pos = strpos($key, $filter);
+                if($pos !== FALSE && substr($key, 0, strlen($filter)) == $filter){
+                    echo "<li><b>$key</b></li>";
+                }
+
+            }
+            else{
+                if(strstr($key, $filter)){
+                    echo "<li><b>$key</b></li>";
+                }
+                    
+            }
+            
         }
     }
     
