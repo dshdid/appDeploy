@@ -59,16 +59,7 @@
     ?>
 </div>
 
-<form action="index.php" method="post">
-        Filter: <input type="text" name="nameFilter"> <!--if i remove the value -> no error-->
-        <input type="checkbox" name="startingWith" value="TRUE">
-        Only names starting with
-        <input type="submit" value="Filter List"> 
-</form>
-
 <div>
-    
-
     <?php
     $filename = "friends.txt";
     $file = fopen( $filename, "r" );
@@ -83,15 +74,12 @@
                 if($pos !== FALSE && substr($key, 0, strlen($filter)) == $filter){
                     echo "<li><b>$key</b></li>";
                 }
-
             }
             else{
-                if(strstr($key, $filter)){
+                if(strstr($key,$filter)){
                     echo "<li><b>$key</b></li>";
-                }
-                    
+                }       
             }
-            
         }
     }
     
@@ -110,12 +98,29 @@
     }  */
 
     echo "</ul>";
+    unset($checked);
+    unset($key);
+    unset($friend);
+    reset($names);
 }?>
 </div>
+
+<form action="index.php" method="post">
+        Filter: <input type="text" name="nameFilter"> <!--if i remove the value -> no error-->
+        <input type="checkbox" name="startingWith" value="TRUE">
+        Only names starting with
+        <input type="submit" value="Filter List"> 
+</form>
 
 <footer>
     <p>Footer</p>
 </footer>
+
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 
 
 </body>
