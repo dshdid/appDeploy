@@ -49,12 +49,6 @@
             fclose( $file );
         }
     }
-   
-    echo "</ul>";
-    foreach($names as $ss){
-        echo "$ss";
-    }
-    
 
     ?>
 </div>
