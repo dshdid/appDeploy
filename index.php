@@ -19,25 +19,26 @@
 
 <form action="index.php" method="post">
     Name: <input type="text" name="name">
-    <input type="submit">
+    <input type="submit" value = "Add Friend">
 </form>
 
 <div>
     <?php
     $filename = "friends.txt";
     $file = fopen( $filename, "r" );
+    $names = array();
     echo "<h1>My best friends:</h1>";
     echo "<ul>";
     if( $file != false ) {
         while (!feof($file)) {
-            $name = fgets($file);
-            if (strlen($name) > 0) {
-                echo "<li>$name</li>";
-            }
+            $friend = fgets($file);
+            if (strlen($friend) > 0) {
+                Array_push($names, $friend);
+                echo "<li>$friend</li>"; 
+        }
 
         }
         fclose( $file );
-    }
 
     if(isset($_POST['name']) && strlen($_POST['name']) > 0) {
         $newName = $_POST['name'];
@@ -50,44 +51,50 @@
     }
    
     echo "</ul>";
+    foreach($names as $ss){
+        echo "$ss";
+    }
     
 
     ?>
 </div>
 
 <form action="index.php" method="post">
-    Filter: <input type="text" name="nameFilter" value="<?=$nameFilter?>">
-    <input type="submit">
+        Filter: <input type="text" name="nameFilter"> <!--if i remove the value -> no error-->
+        <input type="checkbox" name="start"> Only names starting with 
+        <input type="submit" value="Filter List"> 
 </form>
 
 <div>
+    
+
     <?php
     $filename = "friends.txt";
     $file = fopen( $filename, "r" );
     echo "<h1>Results: </h1>";
     echo "<ul>";
-    if( $file != false ) {
+    foreach ($names as $key) {
+        if(isset($_POST['nameFilter']) && strstr($key, $_POST['nameFilter'])){
+            echo "<li><b>$key</b></li>";
+        }
+    }
+    
+
+     /* if( $file != false ) {
         while (!feof($file)) {
             $name = fgets($file);
-            if (strstr(name, nameFilter)) {
-                $_POST.addslashes = $name;
+            if (isset($_POST['nameFilter'])) {
+                $_POST.arraypush($names );
             }
 
         }
         fclose( $file );
 
-        foreach ($_POST as $key) {
-            echo "<li><b>$key</b></li>";
-            }
-
-        }
-        unset($key);
-    }
+        
+    }  */
 
     echo "</ul>";
-    
-
-    ?>
+}?>
 </div>
 
 <footer>
