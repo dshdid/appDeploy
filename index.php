@@ -14,7 +14,7 @@
 </header>
 
 <ul>
-    <li><a href = "PHP.php"> Calculator </a></li>
+    <li><a href = "PHP.php?op=sum&x=3&y=4&name=Professor"> Calculator </a></li>
 </ul>
 
 <form action="index.php" method="post">
@@ -50,7 +50,9 @@
             Array_push($names, $newName);
         }
     }
+
 /********************** PART 2 ***************************/
+
     if(isset($_POST['nameFilter'])){
         $filter = $_POST['nameFilter'];
     }
@@ -79,19 +81,24 @@
                     echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
                 }       
             }
-        } else 
-            echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
+        } else {
+            if($names[$i+1] == null){
+                echo "<li><b>$names[$i]</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
+            }else
+                echo "<li>$key  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
+        }
     }
     echo "</ul>";
 
+/********************** PART 2 ***************************/
+
     if (isset($_POST['delete'])) {
-        $indexToBeRemoved = $_POST['delete'];
-        unset($names[$indexToBeRemoved]);
+        unset($names[$i]);
         $names = array_values($names);
         $file_contents = file_get_contents($filename);
         $file = fopen($filename, "w");
         if( $file != false ) {
-            $file_contents = str_replace($names[$indexToBeRemoved],'',$file_contents);
+            $file_contents = str_replace($names[$i],'',$file_contents);
             fwrite($file, $file_contents);
             fclose($file);
         }
