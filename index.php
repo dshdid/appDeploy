@@ -26,72 +26,77 @@
     <?php
     $filename = "friends.txt";
     $file = fopen( $filename, "r" );
+
     $names = array();
     echo "<h1>My best friends:</h1>";
-    echo "<ul>";
+
     if( $file != false ) {
         while (!feof($file)) {
             $friend = fgets($file);
             if (strlen($friend) > 0) {
                 Array_push($names, $friend);
-                echo "<li>$friend</li>"; 
+                //echo "<li>$friend</li>"; 
         }
-
-        }
+    }
         fclose( $file );
 
     if(isset($_POST['name']) && strlen($_POST['name']) > 0) {
         $newName = $_POST['name'];
         $file = fopen( $filename, "a" );
         if( $file != false ) {
-            echo "<li><b>$newName</b></li>";
+            //echo "<li><b>$newName</b></li>";
             fwrite( $file, $newName ."\n");
             fclose( $file );
+            Array_push($names, $newName);
         }
     }
+/********************** PART 2 ***************************/
+    if(isset($_POST['nameFilter'])){
+        $filter = $_POST['nameFilter'];
+    }
+    
+    $checked = false;
+    if(isset($_POST['startingWith'])){
+        $checked = $_POST['startingWith'];
+    }
+    
+    $i = -1;
 
-    ?>
-</div>
-
-<div>
-    <?php
-    $filename = "friends.txt";
-    $file = fopen( $filename, "r" );
-    $filter = $_POST['nameFilter'];
-    $checked = $_POST['startingWith'];
-    echo "<h1>Results: </h1>";
     echo "<ul>";
+
     foreach ($names as $key) {
-        if(isset($filter)){
+        $i++;
+
+        if(isset($filter) &&strlen($filter) > 0){
             if($checked == TRUE){
                 $pos = strpos($key, $filter);
                 if($pos !== FALSE && substr($key, 0, strlen($filter)) == $filter){
-                    echo "<li><b>$key</b></li>";
+                    echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
                 }
             }
             else{
                 if(strstr($key,$filter)){
-                    echo "<li><b>$key</b></li>";
+                    echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
                 }       
             }
+        } else 
+            echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
+    }
+    echo "</ul>";
+
+    if (isset($_POST['delete'])) {
+        $indexToBeRemoved = $_POST['delete'];
+        unset($names[$indexToBeRemoved]);
+        $names = array_values($names);
+        $file_contents = file_get_contents($filename);
+        $file = fopen($filename, "w");
+        if( $file != false ) {
+            $file_contents = str_replace($names[$indexToBeRemoved],'',$file_contents);
+            fwrite($file, $file_contents);
+            fclose($file);
         }
     }
     
-
-     /* if( $file != false ) {
-        while (!feof($file)) {
-            $name = fgets($file);
-            if (isset($_POST['nameFilter'])) {
-                $_POST.arraypush($names );
-            }
-
-        }
-        fclose( $file );
-
-        
-    }  */
-
-    echo "</ul>";
     unset($checked);
     unset($key);
     unset($friend);
@@ -100,7 +105,7 @@
 </div>
 
 <form action="index.php" method="post">
-        Filter: <input type="text" name="nameFilter"> <!--if i remove the value -> no error-->
+        Filter: <input type="text" name="nameFilter">
         <input type="checkbox" name="startingWith" value="TRUE">
         Only names starting with
         <input type="submit" value="Filter List"> 
