@@ -21,13 +21,37 @@ foreach ($names as $name) {
     <br>
 </header>
 
+<br>
+
+<ul>
+    <li><a href = "index.php"> friend Book </a></li>
+</ul>
+
+<div>
+    <?php
+        $name = $_GET['name'];
+        echo "<h1>Hello, $name</h1>";    
+    ?>
+</div>
+
+<br>
+
+<div>
+<h4>Hi, if you want to do some calculation, please change the op , x, y in the URL to: </h4>
+<ul>
+    <li>op might be equal to sum, substract, multiply or divide </li>
+    <li>x can be equal to whatever </li>
+    <li>y can be equal to whatever </li>
+</ul>
+</div>
+
 <?php
 class Calculator
 {
     function sum($x, $y) {
 	return $x + $y;
     }
-    function subtract($x, $y) {
+    function substract($x, $y) {
         return $x - $y;
     }
     function multiply($x, $y) {
@@ -73,15 +97,6 @@ switch($_GET['op']){
 print("\n");
 
 ?>
-
-<div>
-    <?php
-    
-    $name = $_GET['name'];
-    echo "<h1>Hello, $name</h1>";
-    
-    ?>
-</div>
 
 <footer>
     <p>Footer</p>
