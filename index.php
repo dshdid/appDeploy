@@ -83,22 +83,23 @@
             }
         } else {
             if($names[$i+1] == null){
-                echo "<li><b>$names[$i]</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
+                echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
             }else
                 echo "<li>$key  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
         }
     }
     echo "</ul>";
 
-/********************** PART 2 ***************************/
+/********************** PART 3 ***************************/
 
     if (isset($_POST['delete'])) {
-        unset($names[$i]);
+        $indexToBeRemoved = $_POST['delete'];
+        unset($friendsArray[$indexToBeRemoved]);
         $names = array_values($names);
         $file_contents = file_get_contents($filename);
         $file = fopen($filename, "w");
         if( $file != false ) {
-            $file_contents = str_replace($names[$i],'',$file_contents);
+            $file_contents = str_replace($names[$indexToBeRemoved],'',$file_contents);
             fwrite($file, $file_contents);
             fclose($file);
         }
