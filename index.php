@@ -54,9 +54,8 @@
 /********************** PART 2 ***************************/
 
     if(isset($_POST['nameFilter'])){
-        $filtern = $_POST['nameFilter'];
+        $filter = $_POST['nameFilter'];
     }
-    $filter = ucfirst($filtern);
 
     $checked = false;
     if(isset($_POST['startingWith'])){
@@ -72,13 +71,13 @@
 
         if(isset($filter) &&strlen($filter) > 0){
             if($checked == TRUE){
-                $pos = strpos($key, $filter);
-                if($pos !== FALSE && substr($key, 0, strlen($filter)) == $filter){
+                $pos = strpos(lcfirst($key), $filter);
+                if($pos !== FALSE && substr(lcfirst($key), 0, strlen($filter)) == $filter){
                     echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
                 }
             }
             else{
-                if(strstr($key,$filter)){
+                if(strstr(lcfirst($key),$filter)){
                     echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
                 }       
             }
