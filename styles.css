@@ -8,7 +8,7 @@ h1{
 }
 
 header {
-    background-color: #666;
+    background-color: rgb(7, 17, 75);
     padding: 30px;
     text-align: center;
     font-size: 35px;
@@ -16,10 +16,19 @@ header {
 }
 
 footer {
-      background-color: #777;
+      background-color: rgb(50, 17, 75);
       padding: 15px;
       text-align: center;
       color: white;
 }
 
+.sss{
+    border-color: rgb(75, 4, 4);
+    border-style:dotted;
+    text-decoration-style:dotted;
+    background: rgb(100, 93, 93);
+    margin-left: auto;
+    color: rgb(255, 255, 255);
+    margin-right: 88%;    
+}
 

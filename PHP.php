@@ -17,13 +17,13 @@ foreach ($names as $name) {
 
 <header>
     <br>
-    <p>HEADER</p>
+    <p>CALCULATOR</p>
     <br>
 </header>
 
 <br>
 
-<ul>
+<ul class = sss>
     <li><a href = "index.php"> friend Book </a></li>
 </ul>
 
@@ -99,7 +99,7 @@ print("\n");
 ?>
 
 <footer>
-    <p>Footer</p>
+    <p>Created for educational purposes</p>
 </footer>
 
 

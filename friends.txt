@@ -6,8 +6,4 @@ fadi
 maro
 afrank
 frank
-francis
-mary
-tom
 clara
-george

@@ -13,12 +13,12 @@
     <br>
 </header>
 
-<ul>
+<ul class=sss>
     <li><a href = "PHP.php?op=sum&x=3&y=4&name=Professor"> Calculator </a></li>
 </ul>
 
 <form action="index.php" method="post">
-    Name: <input type="text" name="name">
+    Add a Friend: <input type="text" name="name">
     <input type="submit" value = "Add Friend">
 </form>
 
@@ -34,7 +34,7 @@
         while (!feof($file)) {
             $friend = fgets($file);
             if (strlen($friend) > 0) {
-                Array_push($names, $friend);
+                Array_push($names, ucfirst($friend));
                 //echo "<li>$friend</li>"; 
         }
     }
@@ -44,19 +44,20 @@
         $newName = $_POST['name'];
         $file = fopen( $filename, "a" );
         if( $file != false ) {
-            //echo "<li><b>$newName</b></li>";
+            //echo "<b><li><b>$newName</li></b>";
             fwrite( $file, $newName ."\n");
             fclose( $file );
-            Array_push($names, $newName);
+            Array_push($names, ucfirst($newName));
         }
     }
 
 /********************** PART 2 ***************************/
 
     if(isset($_POST['nameFilter'])){
-        $filter = $_POST['nameFilter'];
+        $filtern = $_POST['nameFilter'];
     }
-    
+    $filter = ucfirst($filtern);
+
     $checked = false;
     if(isset($_POST['startingWith'])){
         $checked = $_POST['startingWith'];
@@ -120,7 +121,7 @@
 </form>
 
 <footer>
-    <p>Footer</p>
+    <p>Created for educational purposes</p>
 </footer>
 
 <script>
