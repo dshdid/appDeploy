@@ -20,7 +20,6 @@
 <form action="index.php" method="post">
     Add a Friend: <input type="text" name="name">
     <input type="submit" value = "Add Friend">
-</form>
 
 <div>
     <?php
@@ -61,24 +60,24 @@
     if(isset($_POST['startingWith'])){
         $checked = $_POST['startingWith'];
     }
-
+    
     /********************** PART 3 ***************************/
-
+    
     if (isset($_POST['delete'])) {
         $indexToBeRemoved = $_POST['delete'];
         unset($names[$indexToBeRemoved]);
         $names = array_values($names);
         $file = fopen($filename, "w");
         if( $file != false ) {
-            foreach ($names as $single){
-                fwrite($file, $single);
+            foreach ($names as $singleName) {
+                fwrite($file, $singleName);
             }
             fclose($file);
+
         }
     }
-    
     $i = -1;
-
+ 
     echo "<ul>";
 
     foreach ($names as $key) {
@@ -97,13 +96,14 @@
                 }       
             }
         } else {
-            if($i==sizeof($names)-1){
+            if ($i==sizeof($names)-1) {
                 echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
             }else
                 echo "<li>$key  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
         }
     }
     echo "</ul>";
+
 
     
     unset($checked);
@@ -112,6 +112,7 @@
     reset($names);
 }?>
 </div>
+</form>
 
 <form action="index.php" method="post">
         Filter: <input type="text" name="nameFilter">
