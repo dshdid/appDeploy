@@ -61,6 +61,21 @@
     if(isset($_POST['startingWith'])){
         $checked = $_POST['startingWith'];
     }
+
+    /********************** PART 3 ***************************/
+
+    if (isset($_POST['delete'])) {
+        $indexToBeRemoved = $_POST['delete'];
+        unset($names[$indexToBeRemoved]);
+        $names = array_values($names);
+        $file = fopen($filename, "w");
+        if( $file != false ) {
+            foreach ($names as $single){
+                fwrite($file, $single);
+            }
+            fclose($file);
+        }
+    }
     
     $i = -1;
 
@@ -82,7 +97,7 @@
                 }       
             }
         } else {
-            if($names[$i+1] == null){
+            if($i==sizeof($names)-1){
                 echo "<li><b>$key</b>  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
             }else
                 echo "<li>$key  <button type='submit' name='delete' value='$i'>Delete</button> </li> <br>";
@@ -90,20 +105,6 @@
     }
     echo "</ul>";
 
-/********************** PART 3 ***************************/
-
-    if (isset($_POST['delete'])) {
-        $indexToBeRemoved = $_POST['delete'];
-        unset($friendsArray[$indexToBeRemoved]);
-        $names = array_values($names);
-        $file_contents = file_get_contents($filename);
-        $file = fopen($filename, "w");
-        if( $file != false ) {
-            $file_contents = str_replace($names[$indexToBeRemoved],'',$file_contents);
-            fwrite($file, $file_contents);
-            fclose($file);
-        }
-    }
     
     unset($checked);
     unset($key);
